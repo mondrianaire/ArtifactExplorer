@@ -110,6 +110,11 @@
               "description": "Artifact names the source references in passing (name-dropped, alluded to, cross-referenced) but does NOT substantively document. Populated during audit. Used for edge-weight computation: the fraction of an artifact's sources that mention a sister artifact measures forensic connection strength. NOT authoritative attribution — passing mentions do not constitute sourcing.",
               "items": { "type": "string" }
             },
+            "concepts": {
+              "type": "array",
+              "description": "Concept names (schema/concepts.yaml) the source defines or substantively documents, for sources cited by concept provenance rather than by artifacts.",
+              "items": { "type": "string" }
+            },
             "convergences": {
               "type": "array",
               "description": "Convergence names the source reasons about (e.g. USED, DEVICE_CONNECTED, COMMUNICATED). Populated from Phase 5 tier-applicability. Absence is fine — many sources apply broadly across convergences (methodology, textbooks). When populated, a convergence citing this source must appear in this list (opt-in validation — relaxed vs tier-1 artifacts).",

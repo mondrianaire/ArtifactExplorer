@@ -758,7 +758,16 @@ def annotate_audit_priorities(data: dict) -> None:
 
 def main() -> None:
     data = build()
-    annotate_audit_priorities(data)
+    # Audit priorities are a maintainer aid that needs the git-ignored
+    # tools/crawl_state.yaml; the viewer doesn't read them. Skip when absent.
+    from next_audit import CRAWL_YAML
+    if CRAWL_YAML.exists():
+        annotate_audit_priorities(data)
+    else:
+        print(f"[info] {CRAWL_YAML.name} not found; skipping audit-priority annotation")
+        data["summary"]["unverified-count"] = sum(
+            1 for n in data["graph"]["nodes"] if n["kind"] == "artifact"
+        )
     # Build-time source coverage gate (Bar A — every entity has at least
     # one cited source-id resolving to a registered + apa-validated entry).
     # Blocks the build when violated so a publish-unsafe data.json never
