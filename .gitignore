@@ -30,3 +30,6 @@ desktop.ini
 
 # Intermediate migration artifacts
 tools/_*.yaml
+
+# Pages build output (assembled in CI)
+_site/
