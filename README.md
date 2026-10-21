@@ -30,17 +30,28 @@ citations in **[01-SCHEMA.md](01-SCHEMA.md)**.
 python tools/serve.py
 ```
 
-Then open http://localhost:8100/viewer/index.html
+Then open http://localhost:8000/viewer/index.html
 
 ## Rebuild the graph from source
 
+Needs Python 3.10+ and the two packages in `requirements.txt`:
+
 ```
+pip install -r requirements.txt
+python tools/validate.py
 python tools/build-graph.py
 ```
 
-Walks `artifacts/`, `convergences/`, `scenarios/`, `concepts/`, `substrates/`
-and the `schema/sources.yaml` registry. Emits `viewer/data.json` (~2.6MB
-minified) which the viewer loads.
+`validate.py` checks every corpus file against the JSON schemas in `schema/`.
+`build-graph.py` walks `artifacts/`, `convergences/`, `scenarios/`,
+`concepts/`, `substrates/` and the `schema/sources.yaml` registry, refuses to
+build if any entity lacks a registered source, and emits `viewer/data.json`
+(~2.8MB minified) which the viewer loads. Maintainer audit scoring runs only
+when the local, git-ignored `tools/crawl_state.yaml` is present.
+
+GitHub Actions runs the same validate + build on every push and pull request
+(`.github/workflows/build.yml`), and `.github/workflows/pages.yml` publishes
+only the built site (root redirect, `viewer/`, `01-SCHEMA.md`) to GitHub Pages.
 
 ## Layout
 
@@ -64,6 +75,18 @@ ArtifactExplorer/
     ├── index.html
     └── data.json           # Compiled graph data
 ```
+
+## Licence
+
+- **Code** (`tools/`, `viewer/index.html`, `index.html`, `schema/*.schema.json`,
+  `.github/`): MIT, see [LICENSE](LICENSE).
+- **Data and documentation** (`artifacts/`, `concepts/`, `convergences/`,
+  `scenarios/`, `substrates/`, `topics/`, `docs/`, `schema/*.md`,
+  `schema/*.yaml`, `01-SCHEMA.md` and the generated `viewer/data.json`):
+  CC BY 4.0, see [LICENSE-CONTENT](LICENSE-CONTENT).
+
+Third-party works listed in `schema/sources.yaml` are cited, not included, and
+remain under their own terms.
 
 ## Citing
 
