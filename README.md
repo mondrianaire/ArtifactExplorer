@@ -4,7 +4,11 @@ Interactive DFIR knowledge graph for Windows forensic artifacts. Browse 292
 artifacts across 15 substrates, see how they corroborate each other through
 34 Tier-2 convergences, and walk 11 Tier-3 case-study scenarios end-to-end.
 
-**Live site:** https://dfirjett.github.io/ArtifactExplorer/
+**Live site:** https://mondrianaire.github.io/ArtifactExplorer/
+
+Maintained at [mondrianaire/ArtifactExplorer](https://github.com/mondrianaire/ArtifactExplorer). The
+original `DFIRJett/ArtifactExplorer` repository and its Pages site are no longer
+updated.
 
 ## What it is
 

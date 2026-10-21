@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/DFIRJett/ArtifactExplorer/blob/main/schema/concept.schema.json",
+  "$id": "https://github.com/mondrianaire/ArtifactExplorer/blob/main/schema/concept.schema.json",
   "title": "ArtifactExplorer Concept frontmatter",
   "description": "Schema for the YAML frontmatter of a concept file under concepts/<Name>.md. Each file defines one forensic concept that artifacts reference via references-data entries.",
   "type": "object",

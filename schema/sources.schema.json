@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/DFIRJett/ArtifactExplorer/blob/main/schema/sources.schema.json",
+  "$id": "https://github.com/mondrianaire/ArtifactExplorer/blob/main/schema/sources.schema.json",
   "title": "ArtifactExplorer Sources registry",
   "description": "Schema for schema/sources.yaml — the canonical bibliographic registry referenced by `provenance:` on artifacts, concepts, convergences, and scenarios.",
   "type": "object",

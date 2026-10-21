@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/DFIRJett/ArtifactExplorer/blob/main/schema/artifact.schema.json",
+  "$id": "https://github.com/mondrianaire/ArtifactExplorer/blob/main/schema/artifact.schema.json",
   "title": "ArtifactExplorer Artifact frontmatter",
   "description": "Schema for the YAML frontmatter of an artifact file under data/artifacts/<substrate>/<Name>.md. The body (Markdown below the closing '---' fence) is prose and not validated.",
   "type": "object",
