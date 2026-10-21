@@ -3095,6 +3095,23 @@
       
       <div class="tool-pane-page active collapsed" id="tool-pane-config">
         <h4 class="tool-section-title">Config · Filters</h4>
+        <h4 class="tool-section-title">Node color</h4>
+        <div class="tool-hint">What node color encodes. Applies to Graph, Substrate and Substrate 3D.</div>
+        <select id="color-driver" class="tool-select" aria-label="Node color">
+          <option value="link">Link affinity (default)</option>
+          <option value="substrate-class">Source class</option>
+          <option value="community">Community (Louvain)</option>
+          <option value="betweenness">Betweenness heat</option>
+        </select>
+
+        <h4 class="tool-section-title" style="margin-top: 10px;">Link color</h4>
+        <div class="tool-hint">Edge color in the Graph view.</div>
+        <select id="link-color-driver" class="tool-select" aria-label="Link color">
+          <option value="link">Link affinity (default)</option>
+          <option value="source-class">Source artifact substrate-class</option>
+          <option value="monochrome">Monochrome (neutral)</option>
+        </select>
+
         <h4 class="tool-section-title">Volatility floor</h4>
         <div class="tool-hint">Hide artifacts whose natural evidence lifetime is below this tier. Slide right = show only the most durable evidence.</div>
         <input type="range" id="volatility-slider" min="0" max="3" step="1" value="0"
@@ -5464,9 +5481,32 @@
         }
       });
     }
-    // Color-driver selectors were removed — link-affinity is the only
-    // driver worth surfacing in the UI. State defaults live in state init
-    // and are read by effectiveEdgeColor / effectiveNodeColor as before.
+    // Color-driver selectors (Config pane). effectiveNodeColor /
+    // effectiveEdgeColor and the 3D _driverColor read these state values.
+    const colorDriverEl = document.getElementById("color-driver");
+    if (colorDriverEl) {
+      colorDriverEl.value = state.colorDriver;
+      colorDriverEl.addEventListener("change", e => {
+        state.colorDriver = e.target.value;
+        // Mirror to body so CSS hides the link-affinity secondary half-
+        // overlay when the driver isn't link.
+        document.body.dataset.colorDriver = state.colorDriver;
+        if (currentView && currentView.recolorNodes) currentView.recolorNodes();
+        renderLegendForCurrentView();
+      });
+    }
+    const linkColorDriverEl = document.getElementById("link-color-driver");
+    if (linkColorDriverEl) {
+      linkColorDriverEl.value = state.linkColorDriver;
+      linkColorDriverEl.addEventListener("change", e => {
+        state.linkColorDriver = e.target.value;
+        if (currentView === graphView && currentView.svg) {
+          currentView.svg.selectAll("path.edge").attr("stroke", d => effectiveEdgeColor(d));
+        }
+        renderLegendForCurrentView();
+      });
+    }
+    // Seed the body attribute at init so first paint matches the state.
     document.body.dataset.colorDriver = state.colorDriver;
   }
 
