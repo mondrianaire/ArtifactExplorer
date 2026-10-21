@@ -8,7 +8,7 @@ join-chain, scenario step primary-source, etc.) so the user knows what to fix.
 import yaml, glob, os
 from collections import defaultdict
 
-ROOT = r'C:\Users\mondr\Documents\ProgFor\ArtifactExplorer'
+ROOT = os.environ.get("ARTIFACT_EXPLORER_ROOT") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 with open(os.path.join(ROOT, 'schema', 'sources.yaml'), 'r', encoding='utf-8') as f:
     sources = yaml.safe_load(f).get('sources', [])

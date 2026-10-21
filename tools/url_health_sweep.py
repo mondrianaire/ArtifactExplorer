@@ -28,6 +28,7 @@ from __future__ import annotations
 import argparse
 import concurrent.futures as cf
 import pathlib
+import os
 import sys
 import time
 import urllib.request
@@ -37,7 +38,7 @@ import ssl
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-ROOT = pathlib.Path(r"C:\Users\mondr\Documents\ProgFor\ArtifactExplorer")
+ROOT = pathlib.Path(os.environ.get("ARTIFACT_EXPLORER_ROOT") or pathlib.Path(__file__).resolve().parents[1])
 SOURCES = ROOT / "schema" / "sources.yaml"
 REPORT = ROOT / "tools" / "_url_health_report.yaml"
 
